@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do App</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            flex-direction: column;
+        }
+        h1{
+            color: #0000ff;
+        }
+        #inputTask{
+            margin-top: 20px;
+        }
+        #inputForm{
+            padding:10px 20px;
+            font-size: x-large;
+            font-weight: 700;
+            border-radius: 10px;
+        }
+        #btn{
+            padding: 10px 20px;
+            font-size: x-large;
+            font-weight: 700;
+            border-radius: 5px;
+            background-color:#4ee74e;
+            cursor: pointer;
+        }
+        #btn:hover{
+            background-color: #ffff00;
+        }
+        ul{
+            margin-top: 20px;
+        }
+        ul li{
+            font-size: x-large;
+            font-weight: 700;
+            color: #4ee74e;
+            margin:40px;
+        }
+        span{
+            margin-left: 20px;
+            border: 1px solid black;
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            font-size: xx-large;
+            font-weight: 900;
+            line-height: 100%;
+            padding: 10px;
+            background-color: #ffff00;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TO Do List App</h1>
+        <div id="inputTask">
+            <input type="text"id="inputForm" placeholder="Add Task... ">
+            <button id="btn">Add</button>
+        </div>
+
+        <ul id="listItem">
+            
+        </ul>
+    </div>
+
+    <script>
+
+        let btn = document.getElementById('btn');
+        let listItem = document.getElementById('listItem');
+        let inputForm = document.getElementById('inputForm');
+        function addTaks(){
+            let val = inputForm.value;
+            if(val == ''){
+                alert("Please Add A Task First....");
+            }
+            else{
+                let li = document.createElement('li');
+                li.innerHTML = val;
+                listItem.appendChild(li);
+
+                let span = document.createElement('span');
+                span.innerHTML = "\u00d7";
+                li.appendChild(span);
+                
+            }
+
+            inputForm.value = '';
+            saveData();
+        }
+
+
+        btn.addEventListener('click',addTaks);
+
+        listItem.addEventListener('click',function(event){
+            if(event.target.tagName === 'SPAN'){
+                event.target.parentElement.remove();
+                saveData();
+            }
+        },false);
+        
+
+        function saveData(){
+            localStorage.setItem("data",listItem.innerHTML);
+        }
+
+        function showData(){
+            listItem.innerHTML = localStorage.getItem("data")
+        }
+
+        showData();
+    </script>
+</body>
+</html>
