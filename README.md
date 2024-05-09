@@ -1,2 +1,1 @@
-# This is a To Do List App Using
- JavaScript
+# This is a To Do List App Using JavaScript
